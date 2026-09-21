@@ -1,5 +1,3 @@
-// src/components/PasswordModal.jsx
-
 import { useState } from "react"
 import { motion } from "framer-motion"
 
@@ -14,12 +12,39 @@ function PasswordModal({ onUnlock }) {
 
         if (password === PASSWORD) {
             setError(false)
+
             onUnlock()
+
             return
         }
 
         setError(true)
         setPassword("")
+    }
+
+    const handleDateChange = (e) => {
+        // 1. Eliminar todo lo que no sea un dígito numérico (esto maneja si el usuario teclea "2106..." o "21/06...")
+        let rawValue = e.target.value.replace(/\D/g, "")
+
+        // 2. Limitar la longitud máxima a 8 dígitos (DDMMYYYY)
+        rawValue = rawValue.substring(0, 8)
+
+        // 3. Aplicar las barras "/" automáticamente usando Regex mientras se escribe
+        let formattedValue = rawValue
+
+        if (rawValue.length > 4) {
+            // Formato para cuando ya hay más de 4 números: DD/MM/YYYY
+            formattedValue = rawValue.replace(
+                /^(\d{2})(\d{2})(\d{1,4})/,
+                "$1/$2/$3",
+            )
+        } else if (rawValue.length > 2) {
+            // Formato para cuando hay entre 3 y 4 números: DD/MM
+            formattedValue = rawValue.replace(/^(\d{2})(\d{1,2})/, "$1/$2")
+        }
+
+        // 4. Actualizar el estado
+        setPassword(formattedValue)
     }
 
     return (
@@ -62,7 +87,7 @@ function PasswordModal({ onUnlock }) {
                         type="text"
                         value={password}
                         onChange={(event) => {
-                            setPassword(event.target.value)
+                            handleDateChange(event)
                             setError(false)
                         }}
                         placeholder="DD/MM/AAAA"
