@@ -1,0 +1,587 @@
+/* src/index.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Quicksand", sans-serif;
+    background: #fff8d9;
+    color: #594d25;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 236, 137, 0.5),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 214, 92, 0.35),
+            transparent 30%
+        ),
+        linear-gradient(135deg, #fffbea 0%, #fff5c7 50%, #fff9df 100%);
+}
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.glow-one {
+    width: 250px;
+    height: 250px;
+    top: -100px;
+    left: -80px;
+    background: rgba(255, 221, 87, 0.25);
+}
+
+.glow-two {
+    width: 300px;
+    height: 300px;
+    bottom: -120px;
+    right: -100px;
+    background: rgba(255, 190, 60, 0.18);
+}
+
+.glow-three {
+    width: 180px;
+    height: 180px;
+    top: 40%;
+    right: 15%;
+    background: rgba(255, 241, 160, 0.25);
+}
+
+/* =========================================
+   ENVELOPE SCREEN
+========================================= */
+
+.envelope-screen {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    z-index: 2;
+
+    padding: 40px 20px;
+}
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.intro-text p {
+    font-family: "Caveat", cursive;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    color: #756127;
+}
+
+.intro-text span {
+    display: block;
+    font-size: 1.4rem;
+    margin-top: 5px;
+}
+
+/* =========================================
+   ENVELOPE
+========================================= */
+
+.envelope-wrapper {
+    position: relative;
+    width: 330px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.envelope {
+    width: 330px;
+    height: 220px;
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    filter: drop-shadow(0 25px 25px rgba(125, 97, 22, 0.16));
+}
+
+.envelope-body {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(145deg, #ffe88a, #f8cf4d);
+
+    border-radius: 8px;
+
+    z-index: 2;
+}
+
+.envelope-body::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            32deg,
+            transparent 49%,
+            rgba(183, 141, 35, 0.16) 50%,
+            transparent 51%
+        ),
+        linear-gradient(
+            -32deg,
+            transparent 49%,
+            rgba(183, 141, 35, 0.16) 50%,
+            transparent 51%
+        );
+}
+
+/* Sobre - solapa */
+
+.envelope-flap {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    border-left: 165px solid transparent;
+    border-right: 165px solid transparent;
+    border-top: 125px solid #f6d45d;
+
+    top: 0;
+    left: 0;
+
+    transform-origin: top center;
+
+    z-index: 5;
+
+    transform-style: preserve-3d;
+}
+
+/* Papel */
+
+.envelope-paper {
+    position: absolute;
+
+    width: 270px;
+    height: 175px;
+
+    left: 30px;
+    top: 20px;
+
+    background: #fffdf3;
+
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "Caveat", cursive;
+    font-size: 1.7rem;
+
+    color: #796323;
+
+    z-index: 1;
+
+    box-shadow: 0 5px 10px rgba(110, 84, 18, 0.08);
+}
+
+.lock {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff9d7;
+
+    box-shadow: 0 5px 15px rgba(93, 71, 18, 0.15);
+
+    font-size: 1.6rem;
+
+    z-index: 10;
+}
+
+.envelope-hint {
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #917c35;
+
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   PASSWORD MODAL
+========================================= */
+
+.password-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 50;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(76, 61, 20, 0.18);
+
+    backdrop-filter: blur(8px);
+}
+
+.password-card {
+    width: min(420px, 100%);
+
+    padding: 40px 30px;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 245, 0.97),
+        rgba(255, 247, 201, 0.97)
+    );
+
+    border: 1px solid rgba(211, 175, 61, 0.25);
+
+    box-shadow: 0 30px 80px rgba(91, 70, 17, 0.18);
+}
+
+.password-icon {
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+}
+
+.password-card h2 {
+    font-family: "Caveat", cursive;
+    font-size: 2rem;
+    font-weight: 600;
+
+    color: #66551e;
+
+    margin-bottom: 8px;
+}
+
+.password-card p {
+    color: #887638;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.password-card form {
+    margin-top: 25px;
+}
+
+.password-card input {
+    width: 100%;
+
+    padding: 14px 18px;
+
+    border: 2px solid #ead78b;
+    border-radius: 14px;
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    text-align: center;
+
+    font-size: 1rem;
+
+    color: #5f511f;
+
+    transition: 0.25s;
+}
+
+.password-card input:focus {
+    border-color: #d9b938;
+
+    box-shadow: 0 0 0 4px rgba(233, 208, 103, 0.18);
+}
+
+.password-card button {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #e7c74f;
+
+    color: #fffdf0;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    box-shadow: 0 8px 20px rgba(196, 158, 37, 0.2);
+}
+
+.password-error {
+    min-height: 25px;
+
+    margin-top: 15px;
+
+    color: #b57b35;
+
+    font-size: 0.85rem;
+}
+
+/* =========================================
+   LETTER
+========================================= */
+
+.letter-page {
+    min-height: 100vh;
+
+    padding: 80px 20px;
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+}
+
+.letter {
+    width: min(750px, 100%);
+
+    min-height: 900px;
+
+    position: relative;
+
+    padding: 70px clamp(25px, 7vw, 80px);
+
+    background: linear-gradient(
+        rgba(255, 255, 248, 0.94),
+        rgba(255, 253, 239, 0.97)
+    );
+
+    border-radius: 4px;
+
+    box-shadow: 0 25px 70px rgba(103, 81, 22, 0.14);
+
+    border: 1px solid rgba(206, 178, 73, 0.2);
+}
+
+.letter::before {
+    content: "";
+
+    position: absolute;
+    inset: 14px;
+
+    border: 1px solid rgba(211, 182, 72, 0.22);
+
+    pointer-events: none;
+}
+
+.letter-decoration {
+    position: absolute;
+
+    font-size: 2rem;
+
+    color: #e7c64e;
+}
+
+.top-left {
+    top: 28px;
+    left: 30px;
+}
+
+.top-right {
+    top: 28px;
+    right: 30px;
+}
+
+.letter-header {
+    text-align: center;
+
+    position: relative;
+    z-index: 2;
+}
+
+.letter-header span {
+    font-size: 0.85rem;
+
+    color: #aa9650;
+
+    letter-spacing: 1px;
+}
+
+.letter-header h1 {
+    margin-top: 12px;
+
+    font-family: "Caveat", cursive;
+
+    font-size: clamp(2.4rem, 6vw, 3.7rem);
+
+    font-weight: 600;
+
+    color: #66551d;
+}
+
+.letter-line {
+    width: 80px;
+    height: 2px;
+
+    margin: 18px auto 0;
+
+    background: #e7cb65;
+}
+
+.letter-content {
+    margin-top: 55px;
+
+    position: relative;
+    z-index: 2;
+
+    font-family: "Caveat", cursive;
+
+    font-size: clamp(1.35rem, 3vw, 1.7rem);
+
+    line-height: 1.7;
+
+    color: #665b36;
+}
+
+.letter-content p {
+    margin-bottom: 30px;
+}
+
+.letter-space {
+    text-align: center;
+
+    color: #e1c44e;
+
+    font-size: 2rem;
+
+    margin: 50px 0;
+}
+
+.letter-final {
+    color: #887126;
+}
+
+.letter-footer {
+    margin-top: 70px;
+
+    text-align: right;
+
+    font-family: "Caveat", cursive;
+
+    font-size: 1.5rem;
+
+    color: #79662a;
+}
+
+.letter-footer strong {
+    display: block;
+
+    font-size: 2rem;
+
+    margin-top: 5px;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+    .envelope-wrapper,
+    .envelope {
+        width: 290px;
+    }
+
+    .envelope {
+        height: 195px;
+    }
+
+    .envelope-flap {
+        border-left-width: 145px;
+        border-right-width: 145px;
+        border-top-width: 110px;
+    }
+
+    .envelope-paper {
+        width: 235px;
+        height: 155px;
+        left: 27px;
+    }
+
+    .letter-page {
+        padding: 30px 12px;
+    }
+
+    .letter {
+        padding: 55px 28px;
+    }
+
+    .letter::before {
+        inset: 9px;
+    }
+
+    .letter-decoration {
+        font-size: 1.5rem;
+    }
+
+    .top-left {
+        top: 20px;
+        left: 20px;
+    }
+
+    .top-right {
+        top: 20px;
+        right: 20px;
+    }
+}
